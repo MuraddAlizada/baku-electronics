@@ -1,0 +1,149 @@
+@import "tailwindcss";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --background: #ffffff;
+    --foreground: #171717;
+    --brandGray: #F5F5F5;
+    --brandGraySecondary: #E1E1E1;
+    --brandRed: #EA2427;
+    --brandGrayText: #333;
+    --brandWhite: #FFF;
+    --brandToggle: #353535;
+    --brandBtn: #333;
+    --placeholderText: #3F3F3F;
+    --fontSfProDisplay: "SfProDisplay", sans-serif;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --background: #1A1A1A;
+    --foreground: #FFF;
+    --brandGrayText: #FFF;
+    --brandGray: #2B2B2B;
+    --brandRed: #EA2427;
+    --brandWhite: #FFF;
+    --brandBtn: #2B2B2B;
+    --placeholderText: #F5f5f5;
+    --brandToggle: #1A1A1A;
+    --brandGraySecondary: #3F3F3F;
+
+
+  }
+}
+
+/* font */
+@font-face {
+  font-family: "SfProDisplay";
+  src: url("/assets/fonts/sf-pro-display/SFPRODISPLAYREGULAR.OTF") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SfProDisplay";
+  src: url("/assets/fonts/sf-pro-display/SFPRODISPLAYMEDIUM.OTF") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* theme */
+@theme {
+  --color-background: var(--background);
+  --color-brandRed: var(--brandRed);
+  --color-foreground: var(--foreground);
+  --brandWhite: #FFF;
+  --color-brandBtn: var(--brandBtn);
+  --color-brandGray: var(--brandGray);
+  --color-brandGrayText: var(--brandGrayText);
+  --color-placeholderText: var(--placeholderText);
+  --color-brandToggle: var(--brandToggle);
+  --color-brandGraySecondary: var(--brandGraySecondary);
+  --font-sfpro: var(--fontSfProDisplay);
+  /* Enable dark mode */
+  --dark-mode: class;
+}
+
+
+@layer utilities {
+  .bg-brandToggle {
+    background-color: var(--brandToggle);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--fontSfProDisplay);
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slider {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.dark .icon-dark-mode {
+  filter: brightness(0) invert(1);
+}
+
+.hover\:icon-dark-mode:hover {
+  filter: brightness(0) invert(1);
+}
+
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--marquee-duration, 30s) linear infinite;
+  will-change: transform;
+}
+
+.animation-paused {
+  animation-play-state: paused;
+  transition: transform 0.5s ease;
+}
+
+.partner-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+
+/* In globals.css */
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-20px) }
+  to   { opacity: 1; transform: translateY(0) }
+}
+@keyframes slide-up {
+  from { opacity: 1; transform: translateY(0) }
+  to   { opacity: 0; transform: translateY(-20px) }
+}
+.animate-slide-down { animation: slide-down 0.3s ease-out forwards; }
+.animate-slide-up   { animation: slide-up   0.3s ease-in  forwards; }
