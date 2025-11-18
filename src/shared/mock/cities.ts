@@ -1,0 +1,1 @@
+export const cities = ["Bakı", "Gəncə", "Sumqayıt", "Şəki", "Naxçıvan"];
