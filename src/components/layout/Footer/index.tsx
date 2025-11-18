@@ -6,6 +6,7 @@ import {
 } from "react-icons/fa";
 import Container from "../Container";
 import { FiPhoneCall } from "react-icons/fi";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -76,9 +77,9 @@ const Footer = () => {
                 <li className=" cursor-pointer">Bloq və xəbərlər</li>
                 <li className=" cursor-pointer">Zəmanət</li>
                 <li>
-                  <a href="/faq" className="cursor-pointer hover:underline">
+                  <Link href="/faq" className="cursor-pointer hover:underline">
                     FAQ
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
