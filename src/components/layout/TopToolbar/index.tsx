@@ -1,6 +1,7 @@
 
 // Modified TopToolBar component
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState, useRef, useEffect } from "react";
 import { TbLayoutGrid } from "react-icons/tb";
@@ -89,7 +90,7 @@ function TopToolBar({ isFixed = false }: TopToolBarProps) {
     <div className={`${isFixed ? 'py-2' : 'my-5'} flex items-center gap-3 sm:gap-4 justify-between flex-wrap relative`}>
       <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
         {/* Logo */}
-        <div className="flex-shrink-0">
+        <Link href="/" className="flex-shrink-0 cursor-pointer">
           <Image
             src="/assets/img/logo-be.png"
             width={80}
@@ -99,7 +100,7 @@ function TopToolBar({ isFixed = false }: TopToolBarProps) {
             className="w-10 h-10 sm:w-12 sm:h-12 object-cover"
             priority
           />
-        </div>
+        </Link>
 
         {/* Kataloq Button */}
         <div className="relative" ref={catalogRef}>
@@ -112,7 +113,7 @@ function TopToolBar({ isFixed = false }: TopToolBarProps) {
           </div>
 
           {catalogOpen && (
-            <ul className="absolute z-30 top-full left-0 mt-2 bg-brandGray border border-gray-200 rounded-xl shadow-lg overflow-hidden animate-fadeIn min-w-[200px]">
+            <ul className="absolute z-30 top-full left-0 mt-2 bg-brandGray border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden animate-fadeIn min-w-[200px]">
               {categories.map((category) => (
                 <li
                   key={category}
@@ -152,7 +153,7 @@ function TopToolBar({ isFixed = false }: TopToolBarProps) {
         </div>
 
         {searchOpen && (
-          <ul className="absolute z-20 w-full bg-brandGray border border-gray-200 mt-2 rounded-xl shadow-lg animate-fadeIn max-h-[400px] overflow-y-auto">
+          <ul className="absolute z-20 w-full bg-brandGray border border-gray-200 dark:border-gray-700 mt-2 rounded-xl shadow-lg animate-fadeIn max-h-[400px] overflow-y-auto">
             {searchQuery.trim() && filteredProducts.length > 0 ? (
               filteredProducts.slice(0, 10).map((product) => (
                 <li
@@ -209,7 +210,7 @@ function TopToolBar({ isFixed = false }: TopToolBarProps) {
         </div>
 
         {dropdownOpen && (
-          <ul className="absolute z-10 w-full bg-brandGray border border-gray-200 mt-2 rounded-xl shadow-lg overflow-hidden animate-fadeIn">
+          <ul className="absolute z-10 w-full bg-brandGray border border-gray-200 dark:border-gray-700 mt-2 rounded-xl shadow-lg overflow-hidden animate-fadeIn">
             {cities
               .filter((city) => city !== selectedCity)
               .map((city) => (
@@ -232,6 +233,8 @@ function TopToolBar({ isFixed = false }: TopToolBarProps) {
             router.push("/cart");
           } else if (icon.id === "heart") {
             router.push("/wishlist");
+          } else if (icon.id === "user") {
+            router.push("/login");
           }
           // Other icons can have their own handlers
         };

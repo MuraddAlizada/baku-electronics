@@ -12,6 +12,7 @@ import type { Product } from "@/src/types";
 import { FiShare2, FiHeart } from "react-icons/fi";
 import { IoStar, IoChevronBack } from "react-icons/io5";
 import Breadcrumb from "@/src/components/shared/Breadcrumb";
+import CustomToast from "@/src/components/layout/CustomToast";
 
 export default function ProductDetail() {
   const router = useRouter();
@@ -20,24 +21,50 @@ export default function ProductDetail() {
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (slug) {
-      const allProducts = mockData.flatMap((cat) => cat.products);
-      const foundProduct = allProducts.find((p) => p.slug === slug);
-      setProduct(foundProduct || null);
-
-      // Son baxılan məhsullara əlavə et
-      if (foundProduct) {
-        const viewed = JSON.parse(
-          localStorage.getItem("recentlyViewed") || "[]"
-        );
-        const filtered = viewed.filter((p: Product) => p.id !== foundProduct.id);
-        const updated = [foundProduct, ...filtered].slice(0, 10);
-        localStorage.setItem("recentlyViewed", JSON.stringify(updated));
-      }
+      setIsLoading(true);
+      // Simulate loading
+      setTimeout(() => {
+        const allProducts = mockData.flatMap((cat) => cat.products);
+        const foundProduct = allProducts.find((p) => p.slug === slug);
+        setProduct(foundProduct || null);
+        setIsLoading(false);
+      }, 500);
     }
   }, [slug]);
+
+  useEffect(() => {
+    if (product && !isLoading) {
+      // Son baxılan məhsullara əlavə et
+      const viewed = JSON.parse(
+        localStorage.getItem("recentlyViewed") || "[]"
+      );
+      const filtered = viewed.filter((p: Product) => p.id !== product.id);
+      const updated = [product, ...filtered].slice(0, 10);
+      localStorage.setItem("recentlyViewed", JSON.stringify(updated));
+    }
+  }, [product, isLoading]);
+
+  if (isLoading) {
+    return (
+      <>
+        <Head>
+          <title>Yüklənir... - Baku Electronics</title>
+        </Head>
+        <Container>
+          <Header />
+          <NavBar />
+          <div className="my-16 flex justify-center items-center min-h-[400px]">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brandToggle"></div>
+          </div>
+        </Container>
+        <Footer />
+      </>
+    );
+  }
 
   if (!product) {
     return (
@@ -82,9 +109,12 @@ export default function ProductDetail() {
     }
   };
 
+  const [showToast, setShowToast] = useState(false);
+
   const handleAddToCart = () => {
     addToCart(product);
-    alert("Məhsul səbətə əlavə olundu!");
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 5000);
   };
 
   const handleAddToFavorites = () => {
@@ -103,6 +133,13 @@ export default function ProductDetail() {
         <title>{product.name} - Baku Electronics</title>
         <meta name="description" content={product.name} />
       </Head>
+      <CustomToast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        product={product ? { image: product.image, name: product.name } : null}
+        message="Məhsul səbətə əlavə olundu"
+        linkHref="/cart"
+      />
       <main>
         <Container>
           <Header />

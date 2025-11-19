@@ -11,15 +11,43 @@ import RecentlyViewed from "@/src/components/home/RecentlyViewed";
 import Head from "next/head";
 import Footer from "@/src/components/layout/Footer";
 import NavBar from "@/src/components/layout/NavBar";
+import OrderSuccessModal from "@/src/components/shared/OrderSuccessModal";
 import { mockServicesData } from "@/src/shared/mock/MockServicesData";
 import { mockData } from "@/src/shared/mock/MockItems";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 export default function Home({ heroData }: { heroData: HeroData }) {
+  const router = useRouter();
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [orderNumber, setOrderNumber] = useState("");
+
+  useEffect(() => {
+    if (router.query.orderSuccess === "true" && router.query.orderNumber) {
+      setOrderNumber(router.query.orderNumber as string);
+      setShowOrderModal(true);
+      // Clean up query params
+      router.replace("/", undefined, { shallow: true });
+    }
+  }, [router.query]);
   return (
     <>
+      <OrderSuccessModal
+        show={showOrderModal}
+        onClose={() => setShowOrderModal(false)}
+        orderNumber={orderNumber}
+      />
       <main>
         <Head>
-          <title>Baku Electronics</title>
+          <title>Baku Electronics - Elektronika məhsulları | Onlayn alış-veriş</title>
+          <meta 
+            name="description" 
+            content="Baku Electronics - Azərbaycanda ən böyük elektronika mağazası. Smartfonlar, laptoplar, televizorlar və digər elektronika məhsulları. Pulsuz çatdırılma, rəsmi zəmanət." 
+          />
+          <meta name="keywords" content="elektronika, smartfon, laptop, televizor, Baku Electronics, alış-veriş, Azərbaycan" />
+          <meta property="og:title" content="Baku Electronics - Elektronika məhsulları" />
+          <meta property="og:description" content="Azərbaycanda ən böyük elektronika mağazası. Geniş məhsul çeşidi, rəsmi zəmanət." />
+          <meta property="og:type" content="website" />
         </Head>
         <Container>
           <Header />

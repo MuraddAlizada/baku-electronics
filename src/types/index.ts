@@ -77,6 +77,8 @@ export interface CartContextType {
   addToFavorites: (product: Product) => void;
   removeFromCart: (productId: string | number) => void;
   removeFromFavorites: (productId: string | number) => void;
+  updateCartItemQuantity: (productId: string | number, quantity: number) => void;
+  clearCart: () => void;
 }
 
 export interface CustomToastProps {

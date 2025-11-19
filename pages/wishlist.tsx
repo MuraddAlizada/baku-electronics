@@ -10,7 +10,7 @@ import { IoTrashOutline, IoHeart } from "react-icons/io5";
 
 export default function Wishlist() {
   const router = useRouter();
-  const { favoriteItems, removeFromFavorites, addToCart } = useCart();
+  const { favoriteItems, removeFromFavorites, addToCart, cartItems } = useCart();
 
   return (
     <>
@@ -41,13 +41,13 @@ export default function Wishlist() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {favoriteItems.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-brandGray p-4 md:p-5 rounded-2xl relative"
+                    className="bg-brandGray p-3 md:p-4 rounded-2xl relative"
                   >
-                    <div className="relative w-full h-48 md:h-64 mb-4">
+                    <div className="relative w-full h-32 md:h-40 mb-3">
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -56,21 +56,21 @@ export default function Wishlist() {
                       />
                       {item.discount && (
                         <div className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-xl">
-                          -{item.discount}%
+                          -{item.discount}
                         </div>
                       )}
                     </div>
 
-                    <h3 className="text-lg font-semibold text-brandGrayText mb-2 line-clamp-2">
+                    <h3 className="text-sm font-semibold text-brandGrayText mb-2 line-clamp-2">
                       {item.name}
                     </h3>
 
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className="text-brandToggle font-bold text-xl">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-brandToggle font-bold text-base">
                         {item.discounted_price}₼
                       </span>
                       {item.discount && (
-                        <span className="text-brandGrayText line-through opacity-50 text-sm">
+                        <span className="text-brandGrayText line-through opacity-50 text-xs">
                           {item.price}₼
                         </span>
                       )}
@@ -78,11 +78,12 @@ export default function Wishlist() {
 
                     <div className="flex gap-2">
                       <button
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           addToCart(item);
-                          router.push("/cart");
+                          removeFromFavorites(item.id);
                         }}
-                        className="flex-1 bg-brandBtn text-white py-2 px-4 rounded-xl font-semibold hover:brightness-110 transition text-sm"
+                        className="flex-1 bg-brandBtn text-white py-2 px-2 rounded-xl font-semibold hover:brightness-110 transition text-xs cursor-pointer"
                       >
                         Səbətə əlavə et
                       </button>
@@ -91,7 +92,7 @@ export default function Wishlist() {
                         className="p-2 bg-red-500/10 text-red-500 rounded-xl hover:bg-red-500/20 transition"
                         aria-label="Remove from favorites"
                       >
-                        <IoTrashOutline className="text-xl" />
+                        <IoTrashOutline className="text-base" />
                       </button>
                     </div>
                   </div>

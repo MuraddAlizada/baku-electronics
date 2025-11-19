@@ -33,7 +33,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   // Load from localStorage only after mount (client-side only)
   useEffect(() => {
     setMounted(true);
-    setCartItems(readItems(STORAGE_KEYS.cart));
+    // Cart starts empty on first visit
+    // Only load favorites from localStorage
     setFavoriteItems(readItems(STORAGE_KEYS.favorites));
   }, []);
 
@@ -53,9 +54,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.id === product.id);
       if (existingItem) {
-        return prevItems;
+        // Increase quantity if item already exists
+        return prevItems.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: (item.quantity || 1) + 1 }
+            : item
+        );
       }
-      return [...prevItems, product];
+      // Add new item with quantity 1 (always start with 1 for new items)
+      return [...prevItems, { ...product, quantity: 1 }];
     });
   };
 
@@ -81,10 +88,32 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const updateCartItemQuantity = (productId: string | number, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(productId);
+      return;
+    }
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === productId ? { ...item, quantity } : item
+      )
+    );
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  // Calculate total cart count (sum of all quantities)
+  const cartCount = cartItems.reduce(
+    (sum, item) => sum + (item.quantity || 1),
+    0
+  );
+
   return (
     <CartContext.Provider
       value={{
-        cartCount: cartItems.length,
+        cartCount,
         favoritesCount: favoriteItems.length,
         cartItems,
         favoriteItems,
@@ -92,6 +121,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         addToFavorites,
         removeFromCart,
         removeFromFavorites,
+        updateCartItemQuantity,
+        clearCart,
       }}
     >
       {children}

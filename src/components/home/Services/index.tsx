@@ -18,7 +18,7 @@ function Services({ data }: ServicesProps) {
           </div>
 
           <div className="flex flex-col gap-1">
-            <h3 className="font-semibold text-base md:text-2xl">
+            <h3 className="font-semibold text-base md:text-2xl text-brandGrayText">
               {item.title}
             </h3>
             <p className="text-sm md:text-base text-brandGrayText opacity-60">

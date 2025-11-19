@@ -34,7 +34,7 @@ function Blogs() {
 
                 <a
                   href={post.link}
-                  className="absolute top-3 right-3 bg-white text-brandToggle font-semibold text-xs   tracking-wide px-4 py-2 rounded-lg shadow-lg transition-opacity duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brandRed"
+                  className="absolute top-3 right-3 bg-background text-brandGrayText font-semibold text-xs tracking-wide px-4 py-2 rounded-lg shadow-lg transition-opacity duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brandRed"
                 >
                   Ətraflı
                 </a>
