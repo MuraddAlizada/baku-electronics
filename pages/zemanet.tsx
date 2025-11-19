@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import Container from "@/src/components/layout/Container";
 import Header from "@/src/components/layout/Header";
 import NavBar from "@/src/components/layout/NavBar";
@@ -79,12 +80,12 @@ export default function Zemanet() {
                 <li>• Zəmanət müddəti ərzində məhsulun təmiri pulsuz həyata keçirilir</li>
                 <li>• Zəmanət şərtləri məhsulun istifadə təlimatına uyğun olaraq tətbiq olunur</li>
               </ul>
-              <a
+              <Link
                 href="/servis-merkezleri"
                 className="bg-brandBtn text-white px-8 py-3 rounded-xl font-semibold hover:brightness-110 transition inline-block"
               >
                 Servis mərkəzləri
-              </a>
+              </Link>
             </div>
           </div>
         </Container>

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import Container from "@/src/components/layout/Container";
 import Header from "@/src/components/layout/Header";
 import NavBar from "@/src/components/layout/NavBar";
@@ -66,12 +67,12 @@ export default function AyliqOdenis() {
                   >
                     Zəng et: 143
                   </a>
-                  <a
+                  <Link
                     href="/magazalar"
                     className="bg-brandGraySecondary text-brandGrayText px-6 py-3 rounded-xl font-semibold hover:bg-brandGray transition text-center"
                   >
                     Mağazalarımız
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

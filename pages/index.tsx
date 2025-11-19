@@ -29,7 +29,7 @@ export default function Home({ heroData }: { heroData: HeroData }) {
       // Clean up query params
       router.replace("/", undefined, { shallow: true });
     }
-  }, [router.query]);
+  }, [router.query, router]);
   return (
     <>
       <OrderSuccessModal

@@ -84,7 +84,7 @@ export interface CartContextType {
 export interface CustomToastProps {
   show: boolean;
   onClose: () => void;
-  product: { image: string; name: string };
+  product: { image: string; name: string } | null;
   message?: string;
   linkText?: string;
   linkHref?: string;

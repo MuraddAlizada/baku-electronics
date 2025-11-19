@@ -7,7 +7,7 @@ import Breadcrumb from "@/src/components/shared/Breadcrumb";
 import { useCart } from "@/src/context/CartContext";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { FiMapPin, FiPhone, FiCreditCard } from "react-icons/fi";
+import { FiCreditCard } from "react-icons/fi";
 
 export default function Checkout() {
   const router = useRouter();

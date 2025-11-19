@@ -3,7 +3,7 @@ import Container from "@/src/components/layout/Container";
 import Header from "@/src/components/layout/Header";
 import NavBar from "@/src/components/layout/NavBar";
 import Footer from "@/src/components/layout/Footer";
-import { FiBriefcase, FiUsers, FiDollarSign } from "react-icons/fi";
+import { FiBriefcase, FiUsers } from "react-icons/fi";
 
 export default function Karyera() {
   const benefits = [

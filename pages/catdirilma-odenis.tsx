@@ -3,7 +3,7 @@ import Container from "@/src/components/layout/Container";
 import Header from "@/src/components/layout/Header";
 import NavBar from "@/src/components/layout/NavBar";
 import Footer from "@/src/components/layout/Footer";
-import { FiTruck, FiCreditCard, FiMapPin, FiClock } from "react-icons/fi";
+import { FiTruck, FiCreditCard } from "react-icons/fi";
 
 export default function CatdirilmaOdenis() {
   const deliveryOptions = [

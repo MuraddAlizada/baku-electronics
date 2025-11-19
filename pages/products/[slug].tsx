@@ -22,6 +22,7 @@ export default function ProductDetail() {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     if (slug) {
@@ -108,8 +109,6 @@ export default function ProductDetail() {
       alert("Link kopyalandı!");
     }
   };
-
-  const [showToast, setShowToast] = useState(false);
 
   const handleAddToCart = () => {
     addToCart(product);

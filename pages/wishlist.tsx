@@ -10,7 +10,7 @@ import { IoTrashOutline, IoHeart } from "react-icons/io5";
 
 export default function Wishlist() {
   const router = useRouter();
-  const { favoriteItems, removeFromFavorites, addToCart, cartItems } = useCart();
+  const { favoriteItems, removeFromFavorites, addToCart } = useCart();
 
   return (
     <>

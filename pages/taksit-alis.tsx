@@ -1,9 +1,10 @@
 import Head from "next/head";
+import Link from "next/link";
 import Container from "@/src/components/layout/Container";
 import Header from "@/src/components/layout/Header";
 import NavBar from "@/src/components/layout/NavBar";
 import Footer from "@/src/components/layout/Footer";
-import { FiCreditCard, FiPercent, FiCheckCircle } from "react-icons/fi";
+import { FiCreditCard, FiCheckCircle } from "react-icons/fi";
 
 export default function TaksitAlis() {
   const benefits = [
@@ -70,12 +71,12 @@ export default function TaksitAlis() {
                 >
                   Zəng et: 143
                 </a>
-                <a
+                <Link
                   href="/magazalar"
                   className="bg-brandGraySecondary text-brandGrayText px-8 py-3 rounded-xl font-semibold hover:bg-brandGray transition text-center"
                 >
                   Mağazalarımız
-                </a>
+                </Link>
               </div>
             </div>
           </div>
